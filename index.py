@@ -66,7 +66,7 @@ for sym in df["Symbol"]:
     interval = share.history(start=latest_date)
 
     share_one = []
-    belgique = []
+    belgium = []
     
     if not interval.empty:
 
@@ -79,13 +79,16 @@ for sym in df["Symbol"]:
             for date_sp in df_SP.index:
                 if date_bfx == date_sp:
                     shares = df_SP.loc[date_sp, "diff %"]
-                    bele = bel.loc[date_bfx, "diff %"]
+                    bel_index = bel.loc[date_bfx, "diff %"]
                     
                     share_one.append(shares)
-                    belgique.append(bele)
+                    belgium.append(bel_index)
                     
                     
                     
-        correlation_matrix = np.corrcoef(belgique, share_one)[0, 1]
+        correlation_matrix = np.corrcoef(belgium, share_one)[0, 1]
         if -0.3 < correlation_matrix > 0.3:
             print(f"{sym} est corréler à {correlation_matrix}")
+
+
+# in summary, no shares in the S&P 500 market are correlated to the Bel_20 market index
